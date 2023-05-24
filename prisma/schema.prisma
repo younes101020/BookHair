@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id              String       @id @default(uuid())
+  nom             String
+  prenom          String
+  email           String       @unique
+  mot_de_passe    String
+  numero_telephone String      @unique
+  adresse         String
+  date_creation   DateTime     @default(now())
+  date_modification DateTime?  @updatedAt
+  reservations    Reservation[]
+  commentaires    Commentaire[]
+}
+
+model Coiffeur {
+  id               String        @id @default(uuid())
+  nom              String
+  email            String        @unique
+  mot_de_passe     String
+  numero_telephone String        @unique
+  adresse          String
+  date_creation    DateTime      @default(now())
+  date_modification DateTime?   @updatedAt
+  servicedetails   ServiceDetails[]
+  commentaires     Commentaire[]
+}
+
+model Service {
+  id                String           @id @default(uuid())
+  nom               String
+  description       String
+  duree             Int
+  date_creation     DateTime         @default(now())
+  date_modification DateTime?        @updatedAt
+  servicedetails    ServiceDetails[]
+}
+
+model ServiceDetails {
+  id                String       @id @default(uuid())
+  prix              Float
+  coiffeur_id       String
+  service_id        String
+  date_creation     DateTime     @default(now())
+  date_modification DateTime?    @updatedAt
+  coiffeur          Coiffeur     @relation(fields: [coiffeur_id], references: [id])
+  service           Service      @relation(fields: [service_id], references: [id])
+  reservations      Reservation[]
+}
+
+model Reservation {
+  id                 String       @id @default(uuid())
+  date_reserv        DateTime
+  client_id          String
+  service_details_id String
+  date_creation      DateTime     @default(now())
+  date_modification  DateTime?    @updatedAt
+  client             Client       @relation(fields: [client_id], references: [id])
+  serviceDetails     ServiceDetails @relation(fields: [service_details_id], references: [id])
+}
+
+model Commentaire {
+  id                String       @id @default(uuid())
+  commentaire       String
+  note              Int
+  date_com          DateTime
+  client_id         String
+  coiffeur_id       String
+  date_creation     DateTime     @default(now())
+  date_modification DateTime?    @updatedAt
+  client            Client       @relation(fields: [client_id], references: [id])
+  coiffeur          Coiffeur     @relation(fields: [coiffeur_id], references: [id])
+}
