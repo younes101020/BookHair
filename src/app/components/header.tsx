@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-export default function Header(): any {
+export default function Header(): JSX.Element {
     return (
-        <header className='flex py-3'>
+        <header className='flex py-5 px-3 bg-opacity-75 absolute z-10 w-full top-0 bg-black border-b-2 border-b-white'>
             <Image
                 src="/img/bookhair.png"
                 width={150}
