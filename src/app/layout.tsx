@@ -1,8 +1,6 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Header from './components/header'
-
-const inter = Inter({ subsets: ['latin'] })
+import '@/styles/globals.css'
+import { Playfair as MainFont }  from './fonts'
+import Header from '@/components/header'
 
 export const metadata = {
   title: 'BookHair',
@@ -17,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       
-      <body className={`${inter.className} bg-black`}>
+      <body className={`${MainFont.className} bg-black`}>
         <Header />
         {children}
       </body>
