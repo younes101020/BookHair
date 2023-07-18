@@ -1,6 +1,6 @@
 import Image from  'next/image';
 
-export default function Hero(): JSX.Element {
+const Hero = (): JSX.Element => {
     return (
         <main className="h-screen w-full bg-gray-400 relative">
             <div className="absolute inset-0">
@@ -24,3 +24,5 @@ export default function Hero(): JSX.Element {
         </main>
     )
 }
+
+export default Hero;
