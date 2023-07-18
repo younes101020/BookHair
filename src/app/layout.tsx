@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import { Playfair as MainFont }  from './fonts'
-import Header from '@/components/header'
+import { Header } from '@/components/header'
 
 export const metadata = {
   title: 'BookHair',

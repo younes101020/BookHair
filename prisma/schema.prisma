@@ -14,8 +14,9 @@ model Client {
   id                String        @id @default(uuid())
   nom               String
   prenom            String
+  role              Role          @default(USER)
   email             String        @unique
-  mot_de_passe      String
+  mot_de_passe      String?
   numero_telephone  String        @unique
   adresse           String
   date_creation     DateTime      @default(now())
@@ -27,8 +28,9 @@ model Client {
 model Coiffeur {
   id                String           @id @default(uuid())
   nom               String
+  role              Role             @default(USER)
   email             String           @unique
-  mot_de_passe      String
+  mot_de_passe      String?
   numero_telephone  String           @unique
   adresse           String
   date_creation     DateTime         @default(now())
@@ -50,13 +52,23 @@ model Service {
 model ServiceDetails {
   id                String        @id @default(uuid())
   prix              Float
+  coupe_id          String
   coiffeur_id       String
   service_id        String
   date_creation     DateTime      @default(now())
   date_modification DateTime?     @updatedAt
+  coupe             Coupe?
   coiffeur          Coiffeur      @relation(fields: [coiffeur_id], references: [id])
   service           Service       @relation(fields: [service_id], references: [id])
   reservations      Reservation[]
+}
+
+model Coupe {
+  id                String        @id @default(uuid())
+  categorie         Categorie
+  name              String
+  servicedetails    ServiceDetails? @relation(fields: [sdId], references: [id])
+  sdId              String        @unique
 }
 
 model Reservation {
@@ -81,4 +93,15 @@ model Commentaire {
   date_modification DateTime? @updatedAt
   client            Client    @relation(fields: [client_id], references: [id])
   coiffeur          Coiffeur  @relation(fields: [coiffeur_id], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Categorie {
+  CHEVEUX
+  BARBE
+  VISAGE
 }
