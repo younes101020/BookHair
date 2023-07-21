@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FORM */
+
+input[type=text], input[type=password], input[type=tel] {
+    height: 1.75rem;
+    background-color: transparent;
+    padding-left: 1.7rem;
+    outline: solid;
+    outline-width: 1px;
+    outline-offset: 2px;
+    outline-color: #fff;
+}
+
+input::placeholder {
+    opacity: 0.75;
+    color: rgb(148 163 184);
+    font-style: italic;
+}

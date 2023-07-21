@@ -2,7 +2,7 @@ import Image from  'next/image';
 
 const Hero = (): JSX.Element => {
     return (
-        <main className="h-screen w-full bg-gray-400 relative">
+        <main className="h-screen w-full bg-gray-400 relative bg-black">
             <div className="absolute inset-0">
                 <Image
                     src="/img/hero.jpg"
