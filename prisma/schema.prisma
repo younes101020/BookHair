@@ -18,7 +18,6 @@ model Client {
   email             String        @unique
   mot_de_passe      String?
   numero_telephone  String        @unique
-  adresse           String
   date_creation     DateTime      @default(now())
   date_modification DateTime?     @updatedAt
   reservations      Reservation[]
