@@ -9,7 +9,7 @@ export const registerSchema = z.object({
     prenom: z.string({
         required_error: "Le prenom est obligatoire"
     }).min(3, {
-        message: "Le nom est trop court"
+        message: "Le prenom est trop court"
     }),
     email: z.string({
         required_error: "L'adresse de messagerie est obligatoire",
@@ -20,7 +20,7 @@ export const registerSchema = z.object({
     mot_de_passe: z.string({
         required_error: "Le mot de passe est obligatoire"
     }).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, {
-        message: "Le mot de passe doit contenir au minimum 8 caractères dont au moins une lettre majuscule et minuscule et un chiffre."
+        message: "8 caractères, 1 lettre majuscule+minuscule, 1 chiffre."
     }),
     confirm: z.string(),
     profile: z.string(),

@@ -32,8 +32,8 @@ export default function RegisterPage() {
       };
     
     return (
-        <section className="h-screen text-lg bg-gradient-radial from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
-            <form onSubmit={handleSubmit((d) => console.log(d))} className="lg:w-2/4 mx-2 mt-3 grid sm:grid-cols-2 gap-3 backdrop-blur-2xl bg-stone-950/30 px-5 py-10 rounded-md text-white">
+        <section className="min-h-screen pt-24 lg:pt-0 text-lg bg-gradient-radial from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="lg:w-2/4 grid sm:grid-cols-2 gap-8 backdrop-blur-2xl bg-stone-950/30 px-5 py-10 rounded-md text-white">
                 <h1 className="col-span-2 text-3xl "><span className="font-bold">Inscris-toi</span> <span className="underline">vite</span>, et prend rendez-vous.</h1>
                 <hr className="col-span-2 w-48 my-3" />
 
@@ -41,7 +41,7 @@ export default function RegisterPage() {
                     <label htmlFor="nom">Nom:</label>
                     <input type="text" id="nom" placeholder="Doe" className="required:border-red-500" {...register('nom')} disabled={isSubmitting} />
                     {errors.nom?.message && (
-                        <p className="text-xs text-red-700">{errors.nom?.message}</p>
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.nom?.message}</p>
                     )}
                     <div className="absolute bottom-[0.3rem] left-1">
                         <AiOutlineAudit />
@@ -51,7 +51,7 @@ export default function RegisterPage() {
                     <label htmlFor="prenom">Prénom:</label>
                     <input type="text" id="prenom" placeholder="John" className="required:border-red-500" {...register('prenom')} disabled={isSubmitting} />
                     {errors.prenom?.message && (
-                        <p className="text-xs text-red-700">{errors.prenom?.message}</p>
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.prenom?.message}</p>
                     )}
                     <div className="absolute bottom-[0.3rem] left-1">
                         <AiOutlineAudit />
@@ -61,7 +61,7 @@ export default function RegisterPage() {
                     <label htmlFor="mot_de_passe">Mot de passe:</label>
                     <input type="password" {...register('mot_de_passe')} id="mot_de_passe" placeholder="••••••••" className="required:border-red-500" disabled={isSubmitting} />
                     {errors.mot_de_passe?.message && (
-                        <p className="text-xs text-red-700">{errors.mot_de_passe?.message}</p>
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.mot_de_passe?.message}</p>
                     )}
                     <div className="absolute bottom-[0.3rem] left-1">
                         <AiOutlineLock />
@@ -71,7 +71,7 @@ export default function RegisterPage() {
                     <label htmlFor="confirm">Retapez le mot de passe:</label>
                     <input type="password" {...register('confirm')} id="confirm" placeholder="••••••••" className="required:border-red-500" disabled={isSubmitting} />
                     {errors.confirm?.message && (
-                        <p className="text-xs text-red-700">{errors.confirm?.message}</p>
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.confirm?.message}</p>
                     )}
                     <div className="absolute bottom-[0.3rem] left-1">
                         <AiOutlineLock />
@@ -81,7 +81,7 @@ export default function RegisterPage() {
                     <label htmlFor="email">Adresse mail:</label>
                     <input type="text" {...register('email')} id="email" placeholder="johndoe@gmail.com" className="required:border-red-500" disabled={isSubmitting} />
                     {errors.email?.message && (
-                        <p className="text-xs text-red-700">{errors.email?.message}</p>
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.email?.message}</p>
                     )}
                     <div className="absolute bottom-[0.3rem] left-1">
                         <AiOutlineMail />
@@ -91,13 +91,13 @@ export default function RegisterPage() {
                     <label htmlFor="telephone">Téléphone:</label>
                     <input type="tel" {...register('telephone')} id="telephone" placeholder="07.60.**.**.**" className="required:border-red-500" disabled={isSubmitting} />
                     {errors.telephone?.message && (
-                        <p className="text-xs text-red-700">{errors.telephone?.message}</p>
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.telephone?.message}</p>
                     )}
                     <div className="absolute bottom-[0.3rem] left-1">
                         <AiOutlinePhone />
                     </div>
                 </div>
-                <fieldset>
+                <fieldset className="relative">
                     <legend>Quel est ton profile ?</legend>
                     <div className="mt-2 flex gap-3 items-center">
                         <input 
@@ -125,17 +125,18 @@ export default function RegisterPage() {
                         />
                         <label htmlFor="coiffeur"> Coiffeur</label>
                     </div>
+                    {errors.profile?.message && (
+                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.profile?.message}</p>
+                    )}
                 </fieldset>
-                {errors.profile?.message && (
-                    <p className="text-xs text-red-700">{errors.profile?.message}</p>
-                )}
+                
                 <hr className="col-span-2 w-14 mt-3" />
                 { profil === "coiffeur" && 
                     <div className="lg:col-span-2 col-span-2 flex flex-col gap-2 relative mb-3">
                         <label htmlFor="adresse">Adresse:</label>
                         <input type="text" {...register("adresse")} id="adresse" placeholder="15 rue General Leclerc" className="required:border-red-500" disabled={isSubmitting} />
                         {errors.adresse?.message && (
-                            <p className="text-xs text-red-700">{errors.adresse?.message}</p>
+                            <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.adresse?.message}</p>
                         )}
                         <div className="absolute bottom-[0.3rem] left-1">
                             <AiOutlineEnvironment />
