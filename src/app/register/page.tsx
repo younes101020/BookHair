@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { addUser } from "@/app/actions";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTransition } from "react";
 import { RegisterType, registerSchema } from "@/lib/user.schema";
 import { AiOutlineMail, AiOutlineAudit, AiOutlineLock, AiOutlineCheck, AiOutlinePhone, AiOutlineEnvironment } from "react-icons/ai";
 
 export default function RegisterPage() {
     const [profil, setProfil] = useState<String>("client");
+    const [isPending, startTransition] = useTransition();
 
     const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProfil(e.target.value)
@@ -22,14 +25,11 @@ export default function RegisterPage() {
         resolver: zodResolver(registerSchema),
     });
 
-    const onSubmit: SubmitHandler<RegisterType> = async (data) => {
-        await new Promise(async (resolve) => {
-          await setTimeout(() => {
-            console.log(data);
-            resolve(undefined);
-          }, 3000);
-        });
-      };
+    const onSubmit: SubmitHandler<RegisterType> = (data) => {
+        startTransition(() => {
+            addUser(data);
+        })
+    };
     
     return (
         <section className="min-h-screen pt-24 lg:pt-0 text-lg bg-gradient-radial from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">

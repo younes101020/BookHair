@@ -3,15 +3,14 @@
 import { prisma } from "@/db";
 // import { withValidate } from "@/lib/form-validation";
 
-export async function addUser(data: any) {
-    const { nom, prenom, email, mot_de_passe, telephone } = Object.fromEntries(data);
+export async function addUser(user: any) {
     const client = await prisma.client.create({
         data: {
-            nom: nom,
-            prenom: prenom,
-            email: email,
-            mot_de_passe: 'sdf',
-            numero_telephone: '07...',
+            nom: user.nom,
+            prenom: user.prenom,
+            email: user.email,
+            mot_de_passe: user.mot_de_passe,
+            numero_telephone: user.telephone,
         },
     })
 }
