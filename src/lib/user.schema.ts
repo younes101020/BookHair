@@ -20,7 +20,7 @@ export const registerSchema = z.object({
     mot_de_passe: z.string({
         required_error: "Le mot de passe est obligatoire"
     }).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, {
-        message: "8 caractères, 1 lettre majuscule+minuscule, 1 chiffre."
+        message: "Exigence min: Azerty-02."
     }),
     confirm: z.string(),
     profile: z.string(),
