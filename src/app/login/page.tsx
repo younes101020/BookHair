@@ -3,16 +3,16 @@
 import { addUser } from "@/app/actions";
 import Link from "next/link";
 import { AiOutlineCheck, AiOutlineLock, AiOutlineMail } from "react-icons/ai";
+import { useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 
-export default function LoginPage() {
-    async function action(data: unknown) {
-        const result = await addUser(data);
-
-        console.log(result)
-    }
+export default function LoginPage(test: unknown) {
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get('callbackUrl')
+    console.log(test)
     return (
         <section className="h-screen text-lg bg-gradient-radial from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
-            <form action={action} className="lg:w-2/4 mx-2 mt-3 grid sm:grid-cols-2 gap-3 backdrop-blur-2xl bg-stone-950/30 px-5 py-10 rounded-md text-white">
+            <form className="lg:w-2/4 mx-2 mt-3 grid sm:grid-cols-2 gap-3 backdrop-blur-2xl bg-stone-950/30 px-5 py-10 rounded-md text-white">
                 <h1 className="col-span-2 text-3xl "><span className="font-bold">Connecte-toi</span> <span className="underline">vite</span>, et prend rendez-vous.</h1>
                 <hr className="col-span-2 w-48 my-3" />
 

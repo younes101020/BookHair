@@ -10,18 +10,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Client {
+model Account {
+  id                 String    @id @default(cuid())
+  userId             String
+  providerType       String
+  providerId         String
+  providerAccountId  String
+  refreshToken       String?
+  accessToken        String?
+  accessTokenExpires DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  user               User      @relation(fields: [userId], references: [id])
+
+  @@unique([providerId, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model VerificationRequest {
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([identifier, token])
+}
+
+model User {
   id                String        @id @default(uuid())
-  nom               String
-  prenom            String
+  name              String
+  lastname          String
   role              Role          @default(USER)
+  image             String?
   email             String        @unique
-  mot_de_passe      String?
-  numero_telephone  String        @unique
-  date_creation     DateTime      @default(now())
-  date_modification DateTime?     @updatedAt
+  emailVerified     DateTime?
+  password          String?
+  phone             String        @unique
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  accounts          Account[]
+  sessions          Session[]
   reservations      Reservation[]
   commentaires      Commentaire[]
+
+  @@map("Client")
 }
 
 model Coiffeur {
@@ -73,11 +117,11 @@ model Coupe {
 model Reservation {
   id                 String         @id @default(uuid())
   date_reserv        DateTime
-  client_id          String
+  user_id            String
   service_details_id String
   date_creation      DateTime       @default(now())
   date_modification  DateTime?      @updatedAt
-  client             Client         @relation(fields: [client_id], references: [id])
+  user               User         @relation(fields: [user_id], references: [id])
   serviceDetails     ServiceDetails @relation(fields: [service_details_id], references: [id])
 }
 
@@ -86,11 +130,11 @@ model Commentaire {
   commentaire       String
   note              Int
   date_com          DateTime
-  client_id         String
+  user_id         String
   coiffeur_id       String
   date_creation     DateTime  @default(now())
   date_modification DateTime? @updatedAt
-  client            Client    @relation(fields: [client_id], references: [id])
+  user              User    @relation(fields: [user_id], references: [id])
   coiffeur          Coiffeur  @relation(fields: [coiffeur_id], references: [id])
 }
 

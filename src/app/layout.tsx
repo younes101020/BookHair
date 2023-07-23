@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import { Playfair as MainFont }  from './fonts'
 import { Header } from '@/components/header'
+import Provider from '@/components/provider'
 
 export const metadata = {
   title: 'BookHair',
@@ -16,8 +17,10 @@ export default function RootLayout({
     <html lang="fr">
       
       <body className={`${MainFont.className}`}>
-        <Header />
-        {children}
+        <Provider>
+          <Header />
+          {children}
+        </Provider>
       </body>
     </html>
   )
