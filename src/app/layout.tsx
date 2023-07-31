@@ -18,6 +18,7 @@ export default function RootLayout({
       
       <body className={`${MainFont.className}`}>
         <Provider>
+          {/* @ts-expect-error Server Component */}
           <Header />
           {children}
         </Provider>

@@ -1,12 +1,11 @@
 'use server'
 
 import { prisma } from "@/db";
-var bcrypt = require('bcryptjs');
+import hashPass from "@/lib/bcrypt/hash";
 // import { withValidate } from "@/lib/form-validation";
 
 export async function addUser(user: any) {
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(user.mot_de_passe, salt);
+    var hash = await hashPass(user.mot_de_passe);
 
     const client = await prisma.user.create({
         data: {
