@@ -16,9 +16,12 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "bcryptjs": "^2.4.3",
     "eslint": "8.41.0",
-    "eslint-config-next": "13.4.3",
-    "next": "^13.4.11",
+    "eslint-config-next": "^13.4.12",
+    "next": "^13.4.12",
+    "next-auth": "^4.22.3",
+    "nodemailer": "^6.9.4",
     "postcss": "8.4.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,6 +32,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "prisma": "^4.14.1"

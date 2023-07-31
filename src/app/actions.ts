@@ -1,20 +1,19 @@
 'use server'
 
 import { prisma } from "@/db";
+import hashPass from "@/lib/bcrypt/hash";
 // import { withValidate } from "@/lib/form-validation";
 
 export async function addUser(user: any) {
-    const client = await prisma.client.create({
+    var hash = await hashPass(user.mot_de_passe);
+
+    const client = await prisma.user.create({
         data: {
-            nom: user.nom,
-            prenom: user.prenom,
+            name: user.nom,
+            lastname: user.prenom,
             email: user.email,
-            mot_de_passe: user.mot_de_passe,
-            numero_telephone: user.telephone,
+            password: hash,
+            phone: user.telephone,
         },
     })
-}
-
-export async function getUser(data: unknown) {
-
 }
