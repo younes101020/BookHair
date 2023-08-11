@@ -13,4 +13,7 @@ declare module "next-auth" {
       accessToken: string;
     //}
   }
+  interface User {
+    role: string;
+  }
 }

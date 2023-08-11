@@ -2,7 +2,7 @@ import Image from 'next/image';
 import  Link from 'next/link';
 import { getServerSession } from 'next-auth'
 import { Roboto as SecondFont } from '@/app/fonts';
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/(lib)/auth/[...nextauth]/route";
 import Signout from '@/components/client/Signout';
 
 export const Header = async () => {
