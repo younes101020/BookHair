@@ -1,7 +1,6 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/db';
 import NextAuth from "next-auth";
-import isSamePass from '@/lib/bcrypt/compare';
 import type { NextAuthOptions } from 'next-auth';
 
 import GoogleProvider from "next-auth/providers/google";
@@ -18,28 +17,21 @@ export const authOptions: NextAuthOptions = {
       type: 'credentials',
       credentials: {},
       async authorize(credentials) {
-        const {email, password} = credentials as {
+        const {email, mot_de_passe} = credentials as {
           email: string;
-          password: string;
+          mot_de_passe: string;
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: email,
-          },
+        const user = await fetch('http://localhost:3000/api/coiffeurs', {
+              method: 'POST',
+              body: JSON.stringify({ email: email, mot_de_passe: mot_de_passe }),
+              headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
         })
-        if (!user) {
-          throw new Error("No user found with this email");
-        }
-
-        const checkPass = await isSamePass(password, user?.password as string);
-
-        if (!checkPass) {
-          throw new Error("Password don't match");
-        }
 
         // Any object returned will be saved in `user` property of the JWT  
-        return user;
+        return await user.json();
       },
     }),  
   ],

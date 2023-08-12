@@ -6,14 +6,14 @@ import { AiOutlineCheck, AiOutlineLock, AiOutlineMail } from "react-icons/ai";
 import { FormEventHandler, useState } from "react";
 
 export default function LoginPage() {
-    const [userInfo, setUserInfo] = useState({email: "",password: ""});
+    const [userInfo, setUserInfo] = useState({email: "",mot_de_passe: ""});
 
     const handleSubmit:FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
         const res = await signIn('credentials', {
             email: userInfo.email,
-            password: userInfo.password,
+            mot_de_passe: userInfo.mot_de_passe,
             redirect: false
         })
         console.log(res)
@@ -49,9 +49,9 @@ export default function LoginPage() {
                         name="mot_de_passe" 
                         id="mot_de_passe" 
                         placeholder="••••••••" 
-                        value={userInfo.password}
+                        value={userInfo.mot_de_passe}
                         onChange={({target}) => {
-                            setUserInfo({...userInfo, password: target.value})
+                            setUserInfo({...userInfo, mot_de_passe: target.value})
                         }}
                         className="required:border-red-500" 
                     />

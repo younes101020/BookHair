@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const registerSchema = z.object({
+const userSchema = z.object({
     nom: z.string({
         required_error: "Le nom est obligatoire"
     }).min(3, {
@@ -24,12 +24,19 @@ export const registerSchema = z.object({
     }),
     confirm: z.string(),
     profile: z.string(),
-}).refine((data) => data.mot_de_passe === data.confirm, {
+});
+
+export const registerSchema = userSchema.refine((data) => data.mot_de_passe === data.confirm, {
         message: "Les deux mots de passe ne correspondent pas",
         path: ["confirm"],
 });
 
 export type RegisterType = z.infer<typeof registerSchema>;
+
+export const bodyLoginSchema = userSchema.pick({ 
+    email: true,
+    mot_de_passe: true
+});
 
 // export async function withValidate(action: any) {
 //     return async (formData: FormData) => {
