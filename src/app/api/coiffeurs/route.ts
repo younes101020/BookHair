@@ -36,9 +36,7 @@ export async function POST(request: Request) {
         })
     }
 
-    return new Response(JSON.stringify({
-        user: user
-    }), { status: 200, statusText: "User gets successfully" });
+    return new Response(JSON.stringify(user), { status: 200, statusText: "User gets successfully" });
 }
 
 export async function PUT(request: Request) {
