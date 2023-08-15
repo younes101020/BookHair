@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { addUser } from "@/app/actions";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from "react";
-import { RegisterType, registerSchema } from "@/lib/user.schema";
+import { RegisterType, registerSchema } from "@/lib/zod/user.schema";
 import { AiOutlineMail, AiOutlineAudit, AiOutlineLock, AiOutlineCheck, AiOutlinePhone, AiOutlineEnvironment } from "react-icons/ai";
 
 export default function RegisterPage() {

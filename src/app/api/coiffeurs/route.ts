@@ -1,5 +1,5 @@
 import isSamePass from '@/lib/bcrypt/compare';
-import { bodyLoginSchema } from '@/lib/user.schema';
+import { bodyLoginSchema } from '@/lib/zod/user.schema';
 import { NextResponse } from 'next/server';
 import { getUser } from '@/lib/prisma/user';
 

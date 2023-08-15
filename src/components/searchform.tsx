@@ -1,6 +1,10 @@
+import { Input } from "@/components/ui/input";
+
 const SearchForm = (): JSX.Element => {
     return (
-        <div></div>
+        <form action="">
+            <Input type="email" placeholder="Email" />
+        </form>
     )
 }
 
