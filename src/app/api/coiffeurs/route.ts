@@ -1,4 +1,3 @@
-import isSamePass from '@/lib/bcrypt/compare';
 import { bodyLoginSchema } from '@/lib/zod/user.schema';
 import { NextResponse } from 'next/server';
 import UserService from '@/services/userService';
@@ -18,7 +17,7 @@ export async function POST(request: Request) {
     const {email, mot_de_passe} = bodyLoginSchema.parse(await request.json());
     try {
         const userRepository = new UserService();
-        const user = userRepository.Login(email, mot_de_passe);
+        const user = await userRepository.Login(email, mot_de_passe);
 
         return NextResponse.json(user);
     } catch (error: any) {

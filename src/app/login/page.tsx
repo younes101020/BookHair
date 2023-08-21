@@ -33,6 +33,7 @@ export default function LoginPage() {
                         placeholder="Email" 
                         name="email" 
                         id="email"
+                        data-test="email"
                         value={userInfo.email} 
                         onChange={({target}) => {
                             setUserInfo({...userInfo, email: target.value})
@@ -40,13 +41,14 @@ export default function LoginPage() {
                         className="required:border-red-500 email-icon"
                     />
                 </div>
-                <div className="flex flex-col gap-2 col-span-1 lg:col-span-1 relative">
+                <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
                     <Label htmlFor="mot_de_passe">Mot de passe:</Label>
                     <Input 
                         type="password" 
                         placeholder="••••••••"
                         name="mot_de_passe" 
                         id="mot_de_passe"
+                        data-test="mot_de_passe"
                         value={userInfo.mot_de_passe}
                         onChange={({target}) => {
                             setUserInfo({...userInfo, mot_de_passe: target.value})
@@ -56,7 +58,7 @@ export default function LoginPage() {
                 </div>
                 <hr className="col-span-2 w-14 my-3" />
                 <div className="col-span-2 flex gap-2 font-bold">
-                    <button type="submit" className="bg-white text-black py-2 px-7 flex items-center gap-2"><AiOutlineCheck />Valider</button>
+                    <button type="submit" className="bg-white text-black py-2 px-7 flex items-center gap-2" data-test="submit"><AiOutlineCheck />Valider</button>
                     <button type="reset" className="bg-red-800 py-2 px-7 flex items-center gap-2"><span className="font-sans font-thin">X</span>Effacer</button>
                 </div>
                 <p className="italic col-span-2 font-extralight text-sm">Tu n'a pas encore de <span className="font-bold">compte</span> ? Alors <Link href="/register" className="underline">Clique ici</Link></p>
