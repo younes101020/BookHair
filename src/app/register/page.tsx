@@ -45,6 +45,7 @@ export default function RegisterPage() {
                         type="text" 
                         placeholder="Doe" 
                         id="nom"
+                        data-test="nom"
                         className="required:border-red-500 name-icon"
                         {...register('nom')}
                         disabled={isSubmitting}
@@ -59,6 +60,7 @@ export default function RegisterPage() {
                         type="text" 
                         placeholder="John" 
                         id="prenom"
+                        data-test="prenom"
                         className="required:border-red-500 name-icon"
                         {...register('prenom')}
                         disabled={isSubmitting}
@@ -73,6 +75,7 @@ export default function RegisterPage() {
                         type="password" 
                         placeholder="••••••••" 
                         id="mot_de_passe"
+                        data-test="mot_de_passe"
                         className="required:border-red-500 password-icon"
                         {...register('mot_de_passe')}
                         disabled={isSubmitting}
@@ -87,6 +90,7 @@ export default function RegisterPage() {
                         type="password" 
                         placeholder="••••••••" 
                         id="confirm"
+                        data-test="confirm"
                         className="required:border-red-500 password-icon"
                         {...register('confirm')}
                         disabled={isSubmitting}
@@ -101,6 +105,7 @@ export default function RegisterPage() {
                         type="text" 
                         placeholder="johndoe@gmail.com" 
                         id="email"
+                        data-test="email"
                         className="required:border-red-500 email-icon"
                         {...register('email')}
                         disabled={isSubmitting}
@@ -115,6 +120,7 @@ export default function RegisterPage() {
                         type="tel" 
                         placeholder="07.60.**.**.**" 
                         id="telephone"
+                        data-test="telephone"
                         className="required:border-red-500 phone-icon"
                         {...register('telephone')}
                         disabled={isSubmitting}
@@ -130,7 +136,8 @@ export default function RegisterPage() {
                             type="radio" 
                             className="appearance-none w-4 h-4 checked:bg-slate-900 checked:ring-offset-2 checked:ring-1 checked:ring-black bg-gray-100" 
                             {...register("profile", { required: true })}
-                            id="client" 
+                            id="client"
+                            data-test="client"
                             value="client" 
                             checked={profil === "client"}
                             onChange={onOptionChange}
@@ -143,7 +150,8 @@ export default function RegisterPage() {
                             type="radio" 
                             className="appearance-none w-4 h-4 checked:bg-slate-900 checked:ring-offset-2 checked:ring-1 checked:ring-black bg-gray-100" 
                             {...register("profile", { required: true })}
-                            id="coiffeur" 
+                            id="coiffeur"
+                            data-test="coiffeur"
                             value="coiffeur" 
                             checked={profil === "coiffeur"}
                             onChange={onOptionChange}
@@ -164,6 +172,7 @@ export default function RegisterPage() {
                             type="text" 
                             placeholder="15 rue General Leclerc" 
                             id="adresse"
+                            data-test="adresse"
                             className="required:border-red-500 position-icon"
                             {...register('adresse')}
                             disabled={isSubmitting}
@@ -175,7 +184,7 @@ export default function RegisterPage() {
                 }
                 
                 <div className="col-span-2 flex gap-2 font-bold">
-                    <button type="submit" className="bg-white text-black py-2 px-7 flex items-center gap-2" disabled={isSubmitting}><AiOutlineCheck />Valider</button>
+                    <button type="submit" className="bg-white text-black py-2 px-7 flex items-center gap-2" disabled={isSubmitting} data-test="submit"><AiOutlineCheck />Valider</button>
                     <button type="reset" className="bg-red-800 py-2 px-7 flex items-center gap-2" disabled={isSubmitting}><span className="font-sans font-thin">X</span>Effacer</button>
                 </div>
                 <p className="italic col-span-2 font-extralight text-sm">Tu a déjà un <span className="font-bold">compte</span> ? Alors <Link href="/login" className="underline">Clique ici</Link></p>

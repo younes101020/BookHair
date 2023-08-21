@@ -11,7 +11,7 @@ export const Header = async () => {
     
     return (
         <header className='flex justify-between py-5 px-3 text-white bg-opacity-75 absolute z-10 w-full top-0 bg-black border-b-2 border-b-white'>
-            <Link href="/">
+            <Link href="/" data-test="backhome">
                 <Image
                     src="/img/bookhair.png"
                     width={160}
@@ -27,8 +27,8 @@ export const Header = async () => {
                         </>
                         :
                         <>
-                            <Link href="/login" className={buttonVariants({ variant: "secondary" })}>S'identifier</Link>
-                            <Link href="/register" className={buttonVariants({ variant: "ghost" })}>Inscription</Link>
+                            <Link href="/login" data-test="login" className={buttonVariants({ variant: "secondary" })}>S'identifier</Link>
+                            <Link href="/register" data-test="register" className={buttonVariants({ variant: "ghost" })}>Inscription</Link>
                         </>
                     }
                     

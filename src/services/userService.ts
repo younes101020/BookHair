@@ -9,9 +9,7 @@ export default class UserService {
             const user = await userRepository.getUserByEmail(email);
 
             if (!user) {
-                return new Response("No user found with this email", {
-                    status: 401
-                })
+                throw new Error("No user found with this email");
             }
 
             const checkPass = await isSamePass(mot_de_passe, user?.password as string);
