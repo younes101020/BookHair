@@ -26,4 +26,4 @@ With BookHair, scheduling a hairdressing appointment becomes a hassle-free exper
 
 ## Architecture
 
-![alt text](https://zupimages.net/viewer.php?id=23/34/sx6e.png)
+![ezcv logo](https://zupimages.net/viewer.php?id=23/34/sx6e.png)
