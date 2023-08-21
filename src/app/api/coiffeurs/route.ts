@@ -1,7 +1,7 @@
 import isSamePass from '@/lib/bcrypt/compare';
 import { bodyLoginSchema } from '@/lib/zod/user.schema';
 import { NextResponse } from 'next/server';
-import UserService from '@/app/services/userService';
+import UserService from '@/services/userService';
 
 export async function GET(request: Request) {
     return new Response("GET COIFFEURS FROM DB", { 
