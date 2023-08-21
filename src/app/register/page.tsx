@@ -1,13 +1,15 @@
 'use client'
 
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label"
 import { useState } from "react";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { addUser } from "@/app/actions";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from "react";
 import { RegisterType, registerSchema } from "@/lib/zod/user.schema";
-import { AiOutlineMail, AiOutlineAudit, AiOutlineLock, AiOutlineCheck, AiOutlinePhone, AiOutlineEnvironment } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
 
 export default function RegisterPage() {
     const [profil, setProfil] = useState<String>("client");
@@ -32,70 +34,94 @@ export default function RegisterPage() {
     };
     
     return (
-        <section className="min-h-screen pt-24 lg:pt-0 text-lg bg-gradient-radial from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
+        <section className="min-h-screen pt-24 lg:pt-0 text-lg bg-gradient-to-r from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
             <form onSubmit={handleSubmit(onSubmit)} className="lg:w-2/4 grid sm:grid-cols-2 gap-8 backdrop-blur-2xl bg-stone-950/30 px-5 py-10 rounded-md text-white">
                 <h1 className="col-span-2 text-3xl "><span className="font-bold">Inscris-toi</span> <span className="underline">vite</span>, et prend rendez-vous.</h1>
                 <hr className="col-span-2 w-48 my-3" />
 
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
-                    <label htmlFor="nom">Nom:</label>
-                    <input type="text" id="nom" placeholder="Doe" className="required:border-red-500" {...register('nom')} disabled={isSubmitting} />
+                    <Label htmlFor="nom">Nom:</Label>
+                    <Input 
+                        type="text" 
+                        placeholder="Doe" 
+                        id="nom"
+                        className="required:border-red-500 name-icon"
+                        {...register('nom')}
+                        disabled={isSubmitting}
+                    />
                     {errors.nom?.message && (
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.nom?.message}</p>
                     )}
-                    <div className="absolute bottom-[0.3rem] left-1">
-                        <AiOutlineAudit />
-                    </div>
                 </div>
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
-                    <label htmlFor="prenom">Prénom:</label>
-                    <input type="text" id="prenom" placeholder="John" className="required:border-red-500" {...register('prenom')} disabled={isSubmitting} />
+                    <Label htmlFor="prenom">Prénom:</Label>
+                    <Input 
+                        type="text" 
+                        placeholder="John" 
+                        id="prenom"
+                        className="required:border-red-500 name-icon"
+                        {...register('prenom')}
+                        disabled={isSubmitting}
+                    />
                     {errors.prenom?.message && (
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.prenom?.message}</p>
                     )}
-                    <div className="absolute bottom-[0.3rem] left-1">
-                        <AiOutlineAudit />
-                    </div>
                 </div>
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
-                    <label htmlFor="mot_de_passe">Mot de passe:</label>
-                    <input type="password" {...register('mot_de_passe')} id="mot_de_passe" placeholder="••••••••" className="required:border-red-500" disabled={isSubmitting} />
+                    <Label htmlFor="mot_de_passe">Mot de passe:</Label>
+                    <Input 
+                        type="password" 
+                        placeholder="••••••••" 
+                        id="mot_de_passe"
+                        className="required:border-red-500 password-icon"
+                        {...register('mot_de_passe')}
+                        disabled={isSubmitting}
+                    />
                     {errors.mot_de_passe?.message && (
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.mot_de_passe?.message}</p>
                     )}
-                    <div className="absolute bottom-[0.3rem] left-1">
-                        <AiOutlineLock />
-                    </div>
                 </div>
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
-                    <label htmlFor="confirm">Retapez le mot de passe:</label>
-                    <input type="password" {...register('confirm')} id="confirm" placeholder="••••••••" className="required:border-red-500" disabled={isSubmitting} />
+                    <Label htmlFor="confirm">Retapez le mot de passe:</Label>
+                    <Input 
+                        type="password" 
+                        placeholder="••••••••" 
+                        id="confirm"
+                        className="required:border-red-500 password-icon"
+                        {...register('confirm')}
+                        disabled={isSubmitting}
+                    />
                     {errors.confirm?.message && (
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.confirm?.message}</p>
                     )}
-                    <div className="absolute bottom-[0.3rem] left-1">
-                        <AiOutlineLock />
-                    </div>
                 </div>
                 <div className="lg:col-span-1 col-span-2 flex flex-col gap-2 relative">
-                    <label htmlFor="email">Adresse mail:</label>
-                    <input type="text" {...register('email')} id="email" placeholder="johndoe@gmail.com" className="required:border-red-500" disabled={isSubmitting} />
+                    <Label htmlFor="email">Adresse mail:</Label>
+                    <Input 
+                        type="text" 
+                        placeholder="johndoe@gmail.com" 
+                        id="email"
+                        className="required:border-red-500 email-icon"
+                        {...register('email')}
+                        disabled={isSubmitting}
+                    />
                     {errors.email?.message && (
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.email?.message}</p>
                     )}
-                    <div className="absolute bottom-[0.3rem] left-1">
-                        <AiOutlineMail />
-                    </div>
                 </div>
                 <div className="lg:col-span-1 col-span-2 flex flex-col gap-2 relative">
-                    <label htmlFor="telephone">Téléphone:</label>
-                    <input type="tel" {...register('telephone')} id="telephone" placeholder="07.60.**.**.**" className="required:border-red-500" disabled={isSubmitting} />
+                    <Label htmlFor="telephone">Téléphone:</Label>
+                    <Input 
+                        type="tel" 
+                        placeholder="07.60.**.**.**" 
+                        id="telephone"
+                        className="required:border-red-500 phone-icon"
+                        {...register('telephone')}
+                        disabled={isSubmitting}
+                    />
                     {errors.telephone?.message && (
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.telephone?.message}</p>
                     )}
-                    <div className="absolute bottom-[0.3rem] left-1">
-                        <AiOutlinePhone />
-                    </div>
                 </div>
                 <fieldset className="relative">
                     <legend>Quel est ton profile ?</legend>
@@ -133,14 +159,18 @@ export default function RegisterPage() {
                 <hr className="col-span-2 w-14 mt-3" />
                 { profil === "coiffeur" && 
                     <div className="lg:col-span-2 col-span-2 flex flex-col gap-2 relative mb-3">
-                        <label htmlFor="adresse">Adresse:</label>
-                        <input type="text" {...register("adresse")} id="adresse" placeholder="15 rue General Leclerc" className="required:border-red-500" disabled={isSubmitting} />
+                       <Label htmlFor="adresse">Adresse:</Label>
+                        <Input 
+                            type="text" 
+                            placeholder="15 rue General Leclerc" 
+                            id="adresse"
+                            className="required:border-red-500 position-icon"
+                            {...register('adresse')}
+                            disabled={isSubmitting}
+                        /> 
                         {errors.adresse?.message && (
                             <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.adresse?.message}</p>
                         )}
-                        <div className="absolute bottom-[0.3rem] left-1">
-                            <AiOutlineEnvironment />
-                        </div>
                     </div>
                 }
                 

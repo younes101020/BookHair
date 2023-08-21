@@ -1,7 +1,7 @@
 import isSamePass from '@/lib/bcrypt/compare';
 import { bodyLoginSchema } from '@/lib/zod/user.schema';
 import { NextResponse } from 'next/server';
-import { getUser } from '@/lib/prisma/user';
+import UserService from '@/app/services/userService';
 
 export async function GET(request: Request) {
     return new Response("GET COIFFEURS FROM DB", { 
@@ -16,24 +16,14 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     const {email, mot_de_passe} = bodyLoginSchema.parse(await request.json());
+    try {
+        const userRepository = new UserService();
+        const user = userRepository.Login(email, mot_de_passe);
 
-    const user = await getUser(email);
-
-    if (!user) {
-        return new Response("No user found with this email", {
-            status: 401
-        })
+        return NextResponse.json(user);
+    } catch (error: any) {
+        return new Response(error);
     }
-
-    const checkPass = await isSamePass(mot_de_passe, user?.password as string);
-
-    if (!checkPass) {
-        return new Response("Password don't match", {
-            status: 401
-        })
-    }
-
-    return NextResponse.json({user});
 }
 
 export async function PUT(request: Request) {

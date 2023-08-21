@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
 import { signIn } from "next-auth/react";
-import { AiOutlineCheck, AiOutlineLock, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
 import { FormEventHandler, useState } from "react";
 
 export default function LoginPage() {
@@ -37,7 +37,7 @@ export default function LoginPage() {
                         onChange={({target}) => {
                             setUserInfo({...userInfo, email: target.value})
                         }} 
-                        className="required:border-red-500 text-black"
+                        className="required:border-red-500 email-icon"
                     />
                 </div>
                 <div className="flex flex-col gap-2 col-span-1 lg:col-span-1 relative">
@@ -51,7 +51,7 @@ export default function LoginPage() {
                         onChange={({target}) => {
                             setUserInfo({...userInfo, mot_de_passe: target.value})
                         }}
-                        className="required:border-red-500 text-black"
+                        className="required:border-red-500 password-icon"
                     />
                 </div>
                 <hr className="col-span-2 w-14 my-3" />
