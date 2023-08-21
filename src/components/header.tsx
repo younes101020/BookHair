@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth'
 import { Roboto as SecondFont } from '@/app/fonts';
 import { authOptions } from "@/app/api/(lib)/auth/[...nextauth]/route";
 import Signout from '@/components/client/Signout';
+import { buttonVariants } from "@/components/ui/button";
 
 export const Header = async () => {
     const session = await getServerSession(authOptions)
@@ -26,8 +27,8 @@ export const Header = async () => {
                         </>
                         :
                         <>
-                            <Link href="/register" className='underline flex items-center'>Inscription</Link>
-                            <Link href="/login" className='text-black bg-white hover:bg-slate-200 p-2'>S'identifier</Link>
+                            <Link href="/login" className={buttonVariants({ variant: "secondary" })}>S'identifier</Link>
+                            <Link href="/register" className={buttonVariants({ variant: "ghost" })}>Inscription</Link>
                         </>
                     }
                     
