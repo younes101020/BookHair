@@ -16,12 +16,14 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     const {email, mot_de_passe} = bodyLoginSchema.parse(await request.json());
     try {
-        const userRepository = new UserService();
-        const user = await userRepository.Login(email, mot_de_passe);
+        const userService = new UserService();
+        const user = await userService.Login(email, mot_de_passe);
 
         return NextResponse.json(user);
     } catch (error: any) {
-        return new Response(error);
+        return new Response(error, {
+            status: 403
+        });
     }
 }
 

@@ -1,4 +1,5 @@
 import { prisma } from '@/db';
+// 'P2025' code erro is fromù
 
 export default class UserRepository {
 
@@ -9,9 +10,17 @@ export default class UserRepository {
                   email: email,
                 },
             })
+            if(!user) {
+                const coiffeur = await prisma.coiffeur.findUniqueOrThrow({
+                    where: {
+                      email: email,
+                    },
+                })
+                return coiffeur
+            }
             return user;
         } catch (error: any) {
-            return error;
+            throw new Error('No consumer found')
         }
     }
 

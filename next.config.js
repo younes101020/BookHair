@@ -10,3 +10,4 @@ module.exports = {
         GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     },
 }
+

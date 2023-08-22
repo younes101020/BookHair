@@ -22,16 +22,29 @@ export const authOptions: NextAuthOptions = {
           mot_de_passe: string;
         }
 
-        const user = await fetch('http://localhost:3000/api/coiffeurs', {
-              method: 'POST',
-              body: JSON.stringify({ email: email, mot_de_passe: mot_de_passe }),
-              headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-              },
-        })
+        try {
+          const user = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify(
+                  { 
+                    email: email, 
+                    mot_de_passe: mot_de_passe,
+                  },
+                ),
+                headers: {
+                  'Content-type': 'application/json; charset=UTF-8',
+                },
+          })
 
-        // Any object returned will be saved in `user` property of the JWT  
-        return await user.json();
+          if(!user.ok) {
+            throw new Error();
+          }
+          // Any object returned will be saved in `user` property of the JWT  
+          return await user.json();
+        } catch(e) {
+          return null;
+        }
+        
       },
     }),  
   ],

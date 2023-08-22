@@ -7,21 +7,22 @@ export default class UserService {
         try {
             const userRepository = new UserRepository();
             const user = await userRepository.getUserByEmail(email);
-
+            console.log(user)
             if (!user) {
                 throw new Error("No user found with this email");
             }
-
+            
+            // @ts-ignore
             const checkPass = await isSamePass(mot_de_passe, user?.password as string);
 
             if (!checkPass) {
                 throw new Error("Password don't match");
             }
 
-            return { user };
+            return user;
 
         } catch (error) {
-            return error;
+            throw new Error('No consumer found')
         }
     }
 
