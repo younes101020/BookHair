@@ -6,23 +6,22 @@ export default class UserService {
     async Login(email: string, mot_de_passe: string) {
         try {
             const userRepository = new UserRepository();
-            const user = await userRepository.getUserByEmail(email);
-            console.log(user)
-            if (!user) {
-                throw new Error("No user found with this email");
+            const [user, coiffeur] = await Promise.all([userRepository.getUserByEmail(email), userRepository.getCoiffeurByEmail(email)]);
+            if (!user && !coiffeur) {
+                throw new Error("No consumer found with this email");
             }
-            
+            const consumer = user ?? coiffeur;
             // @ts-ignore
-            const checkPass = await isSamePass(mot_de_passe, user?.password as string);
+            const checkPass = await isSamePass(mot_de_passe, consumer?.password as string);
 
             if (!checkPass) {
                 throw new Error("Password don't match");
             }
 
-            return user;
+            return consumer;
 
-        } catch (error) {
-            throw new Error('No consumer found')
+        } catch (error: any) {
+            throw new Error(error.message)
         }
     }
 

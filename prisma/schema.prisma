@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Consumer {
+  id            String  @id @default(cuid())
+  name          String?
+  lastname      String?
+  role          Role      @default(USER)
+  email         String?   @unique
+  emailVerified DateTime?
+}
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String

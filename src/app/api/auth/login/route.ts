@@ -18,10 +18,9 @@ export async function POST(request: Request) {
     try {
         const userService = new UserService();
         const user = await userService.Login(email, mot_de_passe);
-
         return NextResponse.json(user);
     } catch (error: any) {
-        return new Response(error, {
+        return new Response(error.message, {
             status: 403
         });
     }
