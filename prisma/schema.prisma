@@ -125,11 +125,11 @@ model Commentaire {
   commentaire       String
   note              Int
   date_com          DateTime
-  user_id         String
+  user_id           String
   coiffeur_id       String
   date_creation     DateTime  @default(now())
   date_modification DateTime? @updatedAt
-  user              User    @relation(fields: [user_id], references: [id])
+  client            User    @relation(fields: [user_id], references: [id])
   coiffeur          Coiffeur  @relation(fields: [coiffeur_id], references: [id])
 }
 
