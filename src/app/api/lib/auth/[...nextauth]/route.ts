@@ -27,8 +27,8 @@ export const authOptions: NextAuthOptions = {
                 method: 'POST',
                 body: JSON.stringify(
                   { 
-                    email: email, 
-                    mot_de_passe: mot_de_passe,
+                    email, 
+                    mot_de_passe,
                   },
                 ),
                 headers: {
@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
           })
 
           if(!user.ok) {
-            throw new Error();
+            throw new Error("server error");
           }
           // Any object returned will be saved in `user` property of the JWT  
           return await user.json();

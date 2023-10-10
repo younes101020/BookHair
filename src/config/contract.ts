@@ -1,9 +1,10 @@
-import { ClientDto, CoiffeurDto } from "./dto";
+import { ClientDto, CoiffeurDto, ReservationDto } from "./dto";
 
 export interface ClientRepository {
     getClientByEmail(email: string): Promise<ClientDto>;
 }
 
-export interface CoiffeurRepository {
-    get(id: string): Promise<CoiffeurDto>;
+export interface ReservationRepository {
+    getReservationByUserId(id: string): Promise<ReservationDto>;
+    getCoiffeurById(id: string): Promise<CoiffeurDto>; 
 }

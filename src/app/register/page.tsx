@@ -10,8 +10,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from "react";
 import { RegisterType, registerSchema } from "@/shared/lib/zod/user.schema";
 import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
+    const { data: session } = useSession();
+    if(session) {
+        redirect('/mon-compte')
+    }
     const [profil, setProfil] = useState<String>("client");
     const [isPending, startTransition] = useTransition();
 

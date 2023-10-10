@@ -1,6 +1,10 @@
 const PORTS = {
+    //db
+    PrismaClient: Symbol.for("PrismaClient"),
+    //domain
     ClientRepository: Symbol.for("ClientRepository"),
-    CoiffeurRepository: Symbol.for("CoiffeurRepository")
+    ReservationRepository: Symbol.for("ReservationRepository"),
+    CoiffeurRepository: Symbol.for("CoiffeurRepository"),
 };
 
 export { PORTS };
