@@ -2,6 +2,9 @@ import '@/styles/globals.css'
 import { Playfair as MainFont }  from './fonts'
 import { Header } from '@/components/header'
 import Provider from '@/components/provider'
+import { Suspense } from 'react'
+import Loading from './loading'
+import { IconContext } from "react-icons";
 
 export const metadata = {
   title: 'BookHair',
@@ -19,7 +22,9 @@ export default function RootLayout({
         <Provider>
           {/* @ts-expect-error Server Component */}
           <Header />
-          {children}
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
         </Provider>
       </body>
     </html>

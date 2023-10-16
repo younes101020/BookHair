@@ -1,5 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
+import { LiaEuroSignSolid } from "react-icons/lia";
+import { PiClockCountdownLight } from "react-icons/pi";
 
 export default function Card({id}: any) {
     const [reservations, setReservations] = useState<any>([]);
@@ -14,7 +16,6 @@ export default function Card({id}: any) {
           
               });
             const data = await response.json();
-            console.log(data)
             setReservations(data);
         }
         fetchReservation();
@@ -27,10 +28,10 @@ export default function Card({id}: any) {
                         <h1 className="text-lg">{reservation.serviceDetails.service.nom}</h1>
                         <hr />
                         <h2>{reservation.serviceDetails.service.description}</h2>
-                        <p>{reservation.serviceDetails.prix} euros</p>
-                        <p>{reservation.serviceDetails.service.duree} min</p>
-                        <p className="muted">Pour le {reservation.date_reserv.replace('T', ' ')}</p>
-                        <p className="muted">Créer le {reservation.date_creation.replace('T', ' ')}</p>
+                        <p className="flex items-center">{reservation.serviceDetails.prix} <LiaEuroSignSolid /></p>
+                        <p className="flex items-center gap-1"><span>{reservation.serviceDetails.service.duree} min</span> <PiClockCountdownLight /></p>
+                        <p className="muted">Pour le {reservation.date_reserv}</p>
+                        <p className="muted">Créer le {reservation.date_creation}</p>
                     </div>
                 ))}
             </>

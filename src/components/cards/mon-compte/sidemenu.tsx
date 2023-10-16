@@ -1,6 +1,6 @@
 'use client'
 import { Roboto } from "@/app/fonts";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import Card from "./card";
 
 function SideMenu({id}: any) {
@@ -19,15 +19,12 @@ function SideMenu({id}: any) {
                     <button onClick={() => updateSection('informations')}>Mes informations</button>
                 </div>
                 <div className="flex flex-col items-center gap-2 bg-slate-300 p-2">
-                    {state === 'reservations' && (
-                        <Suspense fallback={<div>Chargement...</div>}>
-                            <Card id={id} />
-                        </Suspense>
-                    )}
-
-                    {state === 'informations' && 
-                        <div>mes infos</div>
-                    }
+                        {state === 'reservations' && (
+                                <Card id={id} />
+                        )}
+                        {state === 'informations' && 
+                            <div>mes infos</div>
+                        }
                 </div>
             </section> 
     )
