@@ -1,4 +1,4 @@
-import { bodyLoginSchema } from '@/lib/zod/user.schema';
+import { bodyLoginSchema } from '@/shared/lib/zod/user.schema';
 import { NextResponse } from 'next/server';
 import UserService from '@/services/userService';
 

@@ -5,11 +5,17 @@ export default withAuth(
         console.log(req.nextauth.token)
     },
     {
-        callbacks: {
-            authorized: ({ token }) =>  token?.role === "ADMIN",
+    callbacks: {
+        authorized({ req, token }) {
+        // `/admin` requires admin role
+        if (req.nextUrl.pathname === "/admin") {
+            return token?.userRole === "ADMIN"
         }
+        // `/me` only requires the user to be logged in
+        return !!token
+        },
+    },
     }
 )
 
-
-export const config = { matcher: ["/admin"] }
+export const config = { matcher: ["/admin", "/me"] }

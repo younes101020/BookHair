@@ -1,7 +1,7 @@
 'use server'
 
 import { prisma } from "@/db";
-import hashPass from "@/lib/bcrypt/hash";
+import hashPass from "@/shared/lib/bcrypt/hash";
 // import { withValidate } from "@/lib/form-validation";
 
 export async function addUser(user: any) {
