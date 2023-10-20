@@ -3,6 +3,7 @@ import { PORTS } from "@/config/ports";
 import "reflect-metadata";
 import type { ReservationRepository } from "@/config/contract";
 import moment from "moment";
+import 'moment/locale/fr';
 
 @injectable()
 export default class reservationUseCase {
@@ -24,12 +25,13 @@ export default class reservationUseCase {
         }
 
         const formated = reservations.map((elem: any) => {
-            const dateMoment = moment(elem.date_reserv);
-            dateMoment.locale('fr');
-            const dateFormatee = dateMoment.format('dddd D MMM. HH:mm');
+            const date_reserv = moment(elem.date_reserv).locale('fr').format('dddd D MMM. HH:mm');
+            const date_creation = moment(elem.date_creation).locale('fr').format('dddd D MMM. HH:mm');
+            //const date_creation = moment(elem.date_creation).locale('fr').format('dddd D MMM. HH:mm');
             return {
                 ...elem,
-                date_reserv: dateFormatee
+                date_reserv,
+                date_creation
             }})
         
         return formated;
