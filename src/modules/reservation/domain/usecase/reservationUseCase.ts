@@ -1,8 +1,9 @@
 import { injectable, inject } from "inversify";
-import isSamePass from "@/shared/lib/bcrypt/compare";
 import { PORTS } from "@/config/ports";
 import "reflect-metadata";
 import type { ReservationRepository } from "@/config/contract";
+import moment from "moment";
+import 'moment/locale/fr';
 
 @injectable()
 export default class reservationUseCase {
@@ -23,9 +24,16 @@ export default class reservationUseCase {
             throw new Error("No reservations found")
         }
 
-        //const date_reserv = new Date(reservations.date_reserv)
-        //const date = date_reserv.toLocaleDateString()
+        const formated = reservations.map((elem: any) => {
+            const date_reserv = moment(elem.date_reserv).locale('fr').format('dddd D MMM. HH:mm');
+            const date_creation = moment(elem.date_creation).locale('fr').format('dddd D MMM. HH:mm');
+            //const date_creation = moment(elem.date_creation).locale('fr').format('dddd D MMM. HH:mm');
+            return {
+                ...elem,
+                date_reserv,
+                date_creation
+            }})
         
-        return reservations
+        return formated;
     }
 }

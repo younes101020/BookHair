@@ -34,6 +34,7 @@ export default class PrismaReservationRepository implements ReservationRepositor
                     serviceDetails: {
                         include: {
                             service: true,
+                            coiffeur: true,
                         },
                     },
                 },

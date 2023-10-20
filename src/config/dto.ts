@@ -41,6 +41,7 @@ export interface ServiceDetailsDto {
 }
 
 export interface ReservationDto {
+    [x: string]: any;
     id: string;
     date_reserv: Date;
     user_id: string;
