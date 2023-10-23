@@ -11,6 +11,7 @@ services:
     volumes:
       - /pv/db:/var/lib/postgresql
     restart: always
+    command: bash -c "docker exec -it db psql -U postgres -d mydb -a -f /mnt/c/Users/youne/OneDrive/Bureau/mydbbackup.sql"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Azerty-02
