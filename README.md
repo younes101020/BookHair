@@ -23,3 +23,7 @@ For **hairdressers**, it offers a comprehensive management system for:
 5. **Customer Feedback**: System for customers to leave reviews and ratings for hairdressers
 
 With BookHair, scheduling a hairdressing appointment becomes a hassle-free experience. This platform was built with the aim of modernizing the hairdressing industry and bringing convenience to customers and hairdressers alike.
+
+## Architecture
+
+![ezcv logo](https://raw.githubusercontent.com/younes101020/BookHair/main/archi.drawio.png?raw=true)
