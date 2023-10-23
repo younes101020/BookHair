@@ -1,0 +1,19 @@
+version: '3'
+services:
+  bookhair:
+    container_name: bookhair
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 3333:3000
+  db:
+    image: postgres:14.1-alpine
+    volumes:
+      - C:\Program Files\PostgreSQL\15\data:/var/lib/postgresql
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Azerty-02
+      - POSTGRES_DB=mydb
+    ports:
+      - '5432:5432'
