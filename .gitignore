@@ -1,40 +1,43 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+/bookhair/node_modules
+/bookhair/.pnp
+/bookhair/.pnp.js
 
 # testing
-/coverage
+/bookhair/coverage
 
 # next.js
-/.next/
-/out/
+/bookhair/.next/
+/bookhair/out/
 
 # production
-/build
+/bookhair/build
 
 # misc
-.DS_Store
-*.pem
+/bookhair/.DS_Store
+/bookhair/*.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+bookhair/npm-debug.log*
+bookhair/yarn-debug.log*
+bookhair/yarn-error.log*
 
 # local env files
-.env*.local
+/bookhair/.env*.local
 
 # vercel
-.vercel
+/bookhair/.vercel
 
 # typescript
-*.tsbuildinfo
-next-env.d.ts
+/bookhair/*.tsbuildinfo
+/next-env.d.ts/bookhair/
 
 # prisma
-.env
-.env.local
-dev.db*
+/bookhair/.env
+/bookhair/.env.local
+/bookhair/dev.db*
+
+# postgresql
+/postgres-data

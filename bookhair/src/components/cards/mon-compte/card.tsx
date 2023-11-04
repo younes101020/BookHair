@@ -8,7 +8,7 @@ export default function Card({id}: any) {
 
     useEffect(() => {
         const fetchReservation = async () => {
-            const response = await fetch(`http://localhost:3000/api/reservation?id=${id}`, {
+            const response = await fetch(`http://localhost:3333/api/reservation?id=${id}`, {
                 headers : { 
                   'Content-Type': 'application/json',
                   'Accept': 'application/json'
