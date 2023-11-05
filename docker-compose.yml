@@ -1,31 +1,3 @@
-# version: '3.9'
-# services:
-#   bookhair:
-#     container_name: bookhair
-#     depends_on:
-#       - db
-#     environment:
-#       DATABASE_URL: "postgresql://postgres:Azerty-02@postgres:5432/mydb?schema=public"
-#     build:
-#       dockerfile: Dockerfile
-#     ports:
-#       - '3333:3000'
-#       - '5555:5555'
-#     volumes:
-#       - ./src:/app/src
-#   db:
-#     image: postgres:14.1-alpine
-#     container_name: postgres
-#     restart: always
-#     environment:
-#       - POSTGRES_USER=postgres
-#       - POSTGRES_PASSWORD=Azerty-02
-#       - POSTGRES_DB=mydb
-#     volumes:
-#       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-#     ports:
-#       - "5432:5432"
-# Use postgres/example user/password credentials
 services:
   db:
     image: postgres
