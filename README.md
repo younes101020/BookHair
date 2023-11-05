@@ -13,6 +13,9 @@ docker compose up bookhair -d
 
 you can now explore the application from this url [bookhair](http://localhost:3000/)
 
+## Data
+
+your database data will be persisted inside postgres-data folder in the root of the project
 
 ## Contributing
 
