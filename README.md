@@ -2,7 +2,7 @@
 
 ## Installation
 
-Clone the repository and specify de the dev branch with -d option, once that's done you can use docker compose command for build and start db container after that you can do the same thing with the bookhair container (don"t forget the -d option this will allow you to run containers in the background, so you can continue interacting with bash.
+Clone the repository and specify de the dev branch with -d option, once that's done you can use docker compose command for build and start db container after that you can do the same thing with the bookhair container (don"t forget the -d option this will allow you to run containers in the background, so you can continue interacting with bash).
 
 ```bash
 git clone git@github.com:younes101020/BookHair.git -d dev
