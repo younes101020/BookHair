@@ -1,7 +1,8 @@
 import '@/styles/globals.css'
 import { Playfair as MainFont }  from './fonts'
 import { Header } from '@/components/header'
-import Provider from '@/components/provider'
+import AuthProviders from '@/provider/AuthProvider'
+import ThemeProviders from '@/provider/ThemeProvider'
 import { Suspense } from 'react'
 import Loading from './loading'
 import { IconContext } from "react-icons";
@@ -17,15 +18,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body className={`${MainFont.className}`}>
-        <Provider>
-          {/* @ts-expect-error Server Component */}
-          <Header />
-            <Suspense fallback={<Loading />}>
-              {children}
-            </Suspense>
-        </Provider>
+        <ThemeProviders>
+          <AuthProviders>
+            {/* @ts-expect-error Server Component */}
+            <Header />
+              <Suspense fallback={<Loading />}>
+                {children}
+              </Suspense>
+          </AuthProviders>
+        </ThemeProviders>
       </body>
     </html>
   )

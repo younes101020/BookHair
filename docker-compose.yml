@@ -17,4 +17,4 @@ services:
       - '3000:3000'
       - '5555:5555'
     volumes:
-      - ./src:/app/src
+      - ./bookhair/src:/app/src

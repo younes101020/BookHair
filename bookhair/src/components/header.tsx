@@ -5,6 +5,7 @@ import { Roboto as SecondFont } from '@/app/fonts';
 import { authOptions } from "@/app/api/lib/auth/[...nextauth]/route";
 import Signout from '@/components/client/Signout';
 import { buttonVariants } from "@/components/ui/button";
+import ThemeToggle from './client/ThemeToggle';
 
 export const Header = async () => {
     const session = await getServerSession(authOptions)
@@ -20,7 +21,7 @@ export const Header = async () => {
                 />
             </Link>
             <nav className={SecondFont.className}>
-                <ul className='flex gap-4 text-base'>
+                <ul className='flex gap-4 text-base items-center'>
                     {session ?
                         <> 
                             <Signout />
@@ -31,7 +32,9 @@ export const Header = async () => {
                             <Link href="/register" data-test="register" className={buttonVariants({ variant: "ghost" })}>Inscription</Link>
                         </>
                     }
-                    
+                    <li className="cursor-pointer">
+                        <ThemeToggle />
+                    </li>
                 </ul>
             </nav>
         </header>
