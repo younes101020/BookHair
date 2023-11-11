@@ -17,3 +17,7 @@ export async function addUser(user: any) {
         },
     })
 }
+
+export async function getCoiffeur(coiffeur: any) {
+    
+}

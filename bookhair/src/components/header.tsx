@@ -11,10 +11,10 @@ export const Header = async () => {
     const session = await getServerSession(authOptions)
     
     return (
-        <header className='flex justify-between py-5 px-3 text-white bg-opacity-75 absolute z-10 w-full top-0 bg-black border-b-2 border-b-white'>
+        <header className='flex justify-between py-5 px-3 text-white bg-opacity-75 fixed top-0 left-0 z-10 w-full bg-black border-b-2 border-b-white'>
             <Link href="/" data-test="backhome">
                 <Image
-                    src="/img/bookhair.png"
+                    src="/img/BookHair.png"
                     width={160}
                     height={10}
                     alt="Logo of the application"
@@ -28,7 +28,7 @@ export const Header = async () => {
                         </>
                         :
                         <>
-                            <Link href="/login" data-test="login" className={buttonVariants({ variant: "secondary" })}>S'identifier</Link>
+                            <Link href="/login" data-test="login" className={buttonVariants({ variant: "ghost" })}>S'identifier</Link>
                             <Link href="/register" data-test="register" className={buttonVariants({ variant: "ghost" })}>Inscription</Link>
                         </>
                     }
