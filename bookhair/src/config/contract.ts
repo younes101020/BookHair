@@ -4,7 +4,10 @@ export interface ClientRepository {
     getClientByEmail(email: string): Promise<ClientDto>;
 }
 
+export interface CoiffeurRepository {
+    getCoiffeurById(id: string): Promise<CoiffeurDto>;
+}
+
 export interface ReservationRepository {
-    getReservationByUserId(id: string): Promise<ReservationDto>;
-    getCoiffeurById(id: string): Promise<CoiffeurDto>; 
+    getReservationByUserId(id: string): Promise<ReservationDto>; 
 }
