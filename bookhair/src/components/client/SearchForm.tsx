@@ -18,12 +18,12 @@ const SearchForm = (): JSX.Element => {
         const { service, ville } = formElements;
         const url = new URLSearchParams(Array.from<any>(searchParams.entries()));
 
-        if (service) {
-            url.set("service", service);
+        if (service.value.length > 0) {
+            url.set("service", service.value);
         }
 
-        if (ville) {
-            url.set("ville", ville);
+        if (ville.value.length > 0) {
+            url.set("ville", ville.value);
         }
 
         const query = url.toString().length > 0 ? `?${url.toString()}` : "";
