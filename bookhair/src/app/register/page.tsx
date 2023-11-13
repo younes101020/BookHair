@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link";
+import { use } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
 import { useState } from "react";
@@ -9,9 +10,22 @@ import { addUser } from "@/app/actions";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from "react";
 import { RegisterType, registerSchema } from "@/shared/lib/zod/user.schema";
-import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+
+async function getAutoCompletePosition(address: string) {
+    const res = await fetch(`https://cors-anywhere.herokuapp.com/https://api-adresse.data.gouv.fr/search/?q=${address}&limit=15`, { mode: "no-cors" })
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+   
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+   
+    return res.json()
+}
 
 export default function RegisterPage() {
     const { data: session } = useSession();
@@ -38,6 +52,13 @@ export default function RegisterPage() {
             addUser(data);
         })
     };
+
+    const handleChange = async ({ target: { value }}: any) => {
+        if(value.length > 1) {
+            const suggestion = getAutoCompletePosition(encodeURIComponent(value));
+            console.log(suggestion)
+        } 
+    }
     
     return (
         <section className="min-h-screen pt-24 lg:pt-0 text-lg bg-gradient-to-r from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
@@ -182,6 +203,7 @@ export default function RegisterPage() {
                             className="required:border-red-500 position-icon"
                             {...register('adresse')}
                             disabled={isSubmitting}
+                            onChange={handleChange}
                         /> 
                         {errors.adresse?.message && (
                             <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.adresse?.message}</p>

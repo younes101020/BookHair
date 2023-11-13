@@ -5,7 +5,6 @@ import AuthProviders from '@/provider/AuthProvider'
 import ThemeProviders from '@/provider/ThemeProvider'
 import { Suspense } from 'react'
 import Loading from './loading'
-import { IconContext } from "react-icons";
 
 export const metadata = {
   title: 'BookHair',
