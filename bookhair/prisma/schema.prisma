@@ -101,8 +101,7 @@ model Coupe {
   id             String         @id @default(uuid())
   categorie      Categorie
   name           String
-  sdId           String         @unique
-  servicedetails ServiceDetails @relation(fields: [sdId], references: [id])
+  servicedetails ServiceDetails[]
 }
 
 model Reservation {
