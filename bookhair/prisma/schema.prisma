@@ -88,12 +88,13 @@ model ServiceDetails {
   prix              Float
   coiffeur_id       String
   service_id        String
+  coupe_id          String
   date_creation     DateTime      @default(now())
   date_modification DateTime?     @updatedAt
-  coupe             Coupe?
   reservations      Reservation[]
   coiffeur          Coiffeur      @relation(fields: [coiffeur_id], references: [id])
   service           Service       @relation(fields: [service_id], references: [id])
+  coupe             Coupe         @relation(fields: [coupe_id], references: [id])
 }
 
 model Coupe {
