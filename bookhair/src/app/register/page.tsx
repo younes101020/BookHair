@@ -12,6 +12,20 @@ import { RegisterType, registerSchema } from "@/shared/lib/zod/user.schema";
 import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { AutoComplete } from "primereact/autocomplete";
+
+async function getAutoCompletePosition(address: string) {
+    const res = await fetch(`https://cors-anywhere.herokuapp.com/https://api-adresse.data.gouv.fr/search/?q=${address}&limit=15`)
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+   
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+   
+    return res.json()
+}
 
 export default function RegisterPage() {
     const { data: session } = useSession();
@@ -20,6 +34,13 @@ export default function RegisterPage() {
     }
     const [profil, setProfil] = useState<String>("client");
     const [isPending, startTransition] = useTransition();
+    const [value, setValue] = useState("");
+    const [items, setItems] = useState([]);
+
+    const search = (event) => {
+        setItems([...Array(10).keys()].map((item) => event.query + "-" + item));
+        console.log(event);
+    };
 
     const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProfil(e.target.value)
@@ -38,6 +59,13 @@ export default function RegisterPage() {
             addUser(data);
         })
     };
+
+    const handleChange = async ({ target: { value }}: any) => {
+        if(value.length > 3) {
+            const suggestion = getAutoCompletePosition(encodeURIComponent(value));
+            console.log(suggestion)
+        } 
+    }
     
     return (
         <section className="min-h-screen pt-24 lg:pt-0 text-lg bg-gradient-to-r from-slate-900 to-stone-950 flex flex-col gap-2 justify-center items-center">
@@ -169,7 +197,12 @@ export default function RegisterPage() {
                         <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.profile?.message}</p>
                     )}
                 </fieldset>
-                
+                    <AutoComplete
+                        value={value}
+                        suggestions={items}
+                        completeMethod={search}
+                        onChange={(e) => setValue(e.value)}
+                    />
                 <hr className="col-span-2 w-14 mt-3" />
                 { profil === "coiffeur" && 
                     <div className="lg:col-span-2 col-span-2 flex flex-col gap-2 relative mb-3">
