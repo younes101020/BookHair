@@ -27,7 +27,7 @@ const userSchema = z.object({
 });
 
 export const registerSchema = userSchema.refine((data) => data.mot_de_passe === data.confirm, {
-        message: "Les deux mots de passe ne correspondent pas",
+        message: "Les mots de passe ne correspondent pas",
         path: ["confirm"],
 });
 
