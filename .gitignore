@@ -38,6 +38,3 @@ bookhair/yarn-error.log*
 /bookhair/.env
 /bookhair/.env.local
 /bookhair/dev.db*
-
-# postgresql
-/postgres-data
