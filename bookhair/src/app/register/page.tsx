@@ -7,23 +7,18 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { addUser } from "@/app/actions";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTransition } from "react";
 import { RegisterType, registerSchema } from "@/shared/lib/zod/user.schema";
 import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { AutoComplete } from "primereact/autocomplete";
+import toast from 'react-hot-toast';
 
 async function getAutoCompletePosition(address: string) {
     const res = await fetch(`https://cors-anywhere.herokuapp.com/https://api-adresse.data.gouv.fr/search/?q=${address}&limit=15`)
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-   
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to fetch data')
     }
-   
     return res.json()
 }
 
@@ -33,14 +28,6 @@ export default function RegisterPage() {
         redirect('/mon-compte')
     }
     const [profil, setProfil] = useState<String>("client");
-    const [isPending, startTransition] = useTransition();
-    const [value, setValue] = useState("");
-    const [items, setItems] = useState([]);
-
-    const search = (event) => {
-        setItems([...Array(10).keys()].map((item) => event.query + "-" + item));
-        console.log(event);
-    };
 
     const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProfil(e.target.value)
@@ -54,10 +41,14 @@ export default function RegisterPage() {
         resolver: zodResolver(registerSchema),
     });
 
-    const onSubmit: SubmitHandler<RegisterType> = (data) => {
-        startTransition(() => {
-            addUser(data);
-        })
+    const onSubmit: SubmitHandler<RegisterType> = async (data: RegisterType) => {
+        const { error } = await addUser(data);
+        if(error !== undefined) {
+            toast.error(error);
+        } else {
+            toast.success('Inscription réussis');
+            redirect('/login')
+        }
     };
 
     const handleChange = async ({ target: { value }}: any) => {
@@ -85,7 +76,7 @@ export default function RegisterPage() {
                         disabled={isSubmitting}
                     />
                     {errors.nom?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.nom?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.nom?.message}</p>
                     )}
                 </div>
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
@@ -100,7 +91,7 @@ export default function RegisterPage() {
                         disabled={isSubmitting}
                     />
                     {errors.prenom?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.prenom?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.prenom?.message}</p>
                     )}
                 </div>
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
@@ -115,7 +106,7 @@ export default function RegisterPage() {
                         disabled={isSubmitting}
                     />
                     {errors.mot_de_passe?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.mot_de_passe?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.mot_de_passe?.message}</p>
                     )}
                 </div>
                 <div className="flex flex-col gap-2 col-span-2 lg:col-span-1 relative">
@@ -130,7 +121,7 @@ export default function RegisterPage() {
                         disabled={isSubmitting}
                     />
                     {errors.confirm?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.confirm?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.confirm?.message}</p>
                     )}
                 </div>
                 <div className="lg:col-span-1 col-span-2 flex flex-col gap-2 relative">
@@ -145,7 +136,7 @@ export default function RegisterPage() {
                         disabled={isSubmitting}
                     />
                     {errors.email?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.email?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.email?.message}</p>
                     )}
                 </div>
                 <div className="lg:col-span-1 col-span-2 flex flex-col gap-2 relative">
@@ -160,7 +151,7 @@ export default function RegisterPage() {
                         disabled={isSubmitting}
                     />
                     {errors.telephone?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.telephone?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.telephone?.message}</p>
                     )}
                 </div>
                 <fieldset className="relative">
@@ -194,15 +185,9 @@ export default function RegisterPage() {
                         <label htmlFor="coiffeur"> Coiffeur</label>
                     </div>
                     {errors.profile?.message && (
-                        <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.profile?.message}</p>
+                        <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.profile?.message}</p>
                     )}
                 </fieldset>
-                    <AutoComplete
-                        value={value}
-                        suggestions={items}
-                        completeMethod={search}
-                        onChange={(e) => setValue(e.value)}
-                    />
                 <hr className="col-span-2 w-14 mt-3" />
                 { profil === "coiffeur" && 
                     <div className="lg:col-span-2 col-span-2 flex flex-col gap-2 relative mb-3">
@@ -217,7 +202,7 @@ export default function RegisterPage() {
                             disabled={isSubmitting}
                         /> 
                         {errors.adresse?.message && (
-                            <p className="text-sm text-red-600 absolute bottom-[-2rem]">{errors.adresse?.message}</p>
+                            <p className="text-sm whitespace-nowrap text-red-600 absolute bottom-[-1.8rem]">{errors.adresse?.message}</p>
                         )}
                     </div>
                 }

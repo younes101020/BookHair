@@ -6,6 +6,7 @@ import ThemeProviders from '@/provider/ThemeProvider'
 import { Suspense } from 'react'
 import Loading from './loading'
 import { IconContext } from "react-icons";
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'BookHair',
@@ -26,6 +27,7 @@ export default function RootLayout({
             <Header />
               <Suspense fallback={<Loading />}>
                 {children}
+                <Toaster position="top-right" />
               </Suspense>
           </AuthProviders>
         </ThemeProviders>
