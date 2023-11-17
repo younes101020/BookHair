@@ -7,8 +7,9 @@ Clone the repository and specify de the dev branch with -b option, once that's d
 ```bash
 git clone git@github.com:younes101020/BookHair.git -b dev
 cd BookHair
+chmod +x bookhair/start.sh
 docker compose up db -d
-docker compose up bookhair -d
+docker compose up bookhair
 ```
 
 you can now explore the application from this url [bookhair](http://localhost:3000/)
