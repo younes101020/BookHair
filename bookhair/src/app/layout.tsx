@@ -7,6 +7,7 @@ import { Suspense } from 'react'
 import Loading from './loading'
 import { IconContext } from "react-icons";
 import { Toaster } from 'react-hot-toast';
+import BreadCrumbs from '@/components/client/Breadcrumbs'
 
 export const metadata = {
   title: 'BookHair',
@@ -25,6 +26,7 @@ export default function RootLayout({
           <AuthProviders>
             {/* @ts-expect-error Server Component */}
             <Header />
+            <BreadCrumbs />
               <Suspense fallback={<Loading />}>
                 {children}
                 <Toaster position="top-right" />

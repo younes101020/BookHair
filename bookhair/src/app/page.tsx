@@ -5,7 +5,7 @@ import Image from  'next/image';
 export default function Home() {
   return (
     <div>
-      <main className="h-screen flex flex-wrap items-center justify-center w-full bg-gray-400 relative bg-black">
+      <main className="h-screen flex flex-wrap items-center justify-center w-full bg-gray-400 bg-black">
           <div className="absolute inset-0">
               <Image
                   src="/img/hero.jpg"
