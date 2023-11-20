@@ -11,7 +11,7 @@ export const Header = async () => {
     const session = await getServerSession(authOptions)
     
     return (
-        <header className='flex justify-between py-5 px-3 text-white bg-opacity-75 fixed top-0 left-0 z-10 w-full bg-black border-b-2 border-b-white'>
+        <header className='flex justify-between py-5 px-3 text-white bg-opacity-75 sticky top-0 z-10 w-full bg-black border-b-2 border-b-white'>
             <Link href="/" data-test="backhome">
                 <Image
                     src="/img/BookHair.png"
