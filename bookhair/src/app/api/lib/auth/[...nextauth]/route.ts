@@ -1,10 +1,10 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { prisma } from '@/db';
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/db";
 import NextAuth from "next-auth";
-import type { NextAuthOptions } from 'next-auth';
+import type { NextAuthOptions } from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -15,43 +15,40 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     CredentialsProvider({
-      type: 'credentials',
+      type: "credentials",
       credentials: {},
       async authorize(credentials) {
-        const {email, mot_de_passe} = credentials as {
+        const { email, mot_de_passe } = credentials as {
           email: string;
           mot_de_passe: string;
-        }
+        };
 
         try {
-          const user = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
-                body: JSON.stringify(
-                  { 
-                    email, 
-                    mot_de_passe,
-                  },
-                ),
-                headers: {
-                  'Content-type': 'application/json; charset=UTF-8',
-                },
-          })
+          const user = await fetch("http://localhost:3000/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({
+              email,
+              mot_de_passe,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          });
 
-          if(!user.ok) {
+          if (!user.ok) {
             throw new Error("server error");
           }
-          // Any object returned will be saved in `user` property of the JWT  
+          // Any object returned will be saved in `user` property of the JWT
           return await user.json();
-        } catch(e) {
+        } catch (e) {
           return null;
         }
-        
       },
-    }),  
+    }),
   ],
   session: {
     strategy: "jwt",
-    maxAge: 60 * 60 * 24
+    maxAge: 60 * 60 * 24,
   },
   callbacks: {
     async jwt({ user, token }) {
@@ -64,7 +61,7 @@ export const authOptions: NextAuthOptions = {
       //   return final_token
       return token;
     },
-    async session({ session, token}) {
+    async session({ session, token }) {
       //  update session from token
       session.email = token.email as string;
       session.accessToken = token.accessToken as string;
@@ -72,10 +69,10 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/login'
+    signIn: "/login",
   },
-  debug: true
-}
+  debug: true,
+};
 
 const handler = NextAuth(authOptions);
 

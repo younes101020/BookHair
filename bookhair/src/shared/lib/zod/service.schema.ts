@@ -1,5 +1,3 @@
 import { z } from "zod";
 
-export const searchServiceSchema = z.object({
-    
-})
+export const searchServiceSchema = z.object({});
