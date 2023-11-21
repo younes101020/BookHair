@@ -102,4 +102,5 @@ input[type=text], input[type=password], input[type=tel], input[type=email] {
 .bc_items:not(:first-child):before {
   content: ">";
   padding-right: .5rem;
+  font-weight: 100;
 }
