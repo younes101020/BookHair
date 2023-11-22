@@ -7,6 +7,7 @@ import { Roboto as SecondFont } from "@/app/fonts";
 export default function BreadCrumbs() {
   const router = useRouter();
   const segments = useSelectedLayoutSegments();
+  segments.unshift("Accueil");
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
