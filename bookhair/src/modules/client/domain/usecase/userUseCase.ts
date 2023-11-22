@@ -6,28 +6,27 @@ import type { ClientRepository } from "@/config/contract";
 
 @injectable()
 export default class userUseCase {
+  private _userRepo: ClientRepository;
 
-    private _userRepo:  ClientRepository
+  public constructor(
+    @inject(PORTS.ClientRepository) userRepo: ClientRepository,
+  ) {
+    this._userRepo = userRepo;
+  }
 
-    public constructor(
-        @inject(PORTS.ClientRepository) userRepo: ClientRepository
-    ) {
-        this._userRepo = userRepo
+  public async login(email: string, mot_de_passe: string) {
+    const user = await this._userRepo.getClientByEmail(email);
+
+    if (!user) {
+      throw new Error("No user found");
     }
 
-    public async login(email: string, mot_de_passe: string) {
-        const user = await this._userRepo.getClientByEmail(email)
+    const isLogin = await isSamePass(mot_de_passe, user.password);
 
-        if(!user) {
-            throw new Error("No user found")
-        }
-
-        const isLogin = await isSamePass(mot_de_passe, user.password);
-
-        if(!isLogin) {
-            throw new Error("Wrong password")
-        }
-        
-        return user;
+    if (!isLogin) {
+      throw new Error("Wrong password");
     }
+
+    return user;
+  }
 }

@@ -1,3 +1,3 @@
 export default function Spinner() {
-    return <div className="lds-dual-ring"></div>
+  return <div className="lds-dual-ring"></div>;
 }
