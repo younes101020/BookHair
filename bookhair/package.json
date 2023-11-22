@@ -48,10 +48,16 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "cypress": "^12.17.4",
+    "eslint-config-prettier": "^9.0.0",
     "inversify": "^6.0.1",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "prisma": "^4.14.1",
     "reflect-metadata": "^0.1.13"
-  }
+  },
+  "description": "BookHair is a web-based platform built with Next.js, React, Prisma, and PostgreSQL. It's designed to simplify the process of scheduling hairdressing appointments for both customers and hairdressers.",
+  "main": "prettier.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
