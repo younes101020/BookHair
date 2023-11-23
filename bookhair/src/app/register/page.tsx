@@ -44,18 +44,19 @@ export default function RegisterPage() {
   });
 
   const onSubmit: SubmitHandler<RegisterType> = async (data: RegisterType) => {
-    const { error } = await addUser(data);
-    if (error !== undefined) {
-      toast.error(error);
-    } else {
-      toast.success("Inscription réussis");
-      redirect("/login");
-    }
+    console.log(data)
+    // const { error } = await addUser(data);
+    // if (error !== undefined) {
+    //   toast.error(error);
+    // } else {
+    //   toast.success("Inscription réussis");
+    //   redirect("/login");
+    // }
   };
 
   const handleChange = async ({ target: { value } }: any) => {
     if (value.length > 3) {
-      const suggestion = getAutoCompletePosition(encodeURIComponent(value));
+      const suggestion = await getAutoCompletePosition(encodeURIComponent(value));
       console.log(suggestion);
     }
   };
@@ -222,6 +223,7 @@ export default function RegisterPage() {
               className="position-icon required:border-red-500"
               {...register("adresse")}
               disabled={isSubmitting}
+              onChange={handleChange}
             />
             {errors.adresse?.message && (
               <p className="absolute bottom-[-1.8rem] whitespace-nowrap text-sm text-red-600">
