@@ -25,7 +25,9 @@ const userSchema = z.object({
   telephone: z
     .string()
     .regex(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/, "Numero invalide"),
-  adresse: z.optional(z.string()),
+  adresse: z
+    .string()
+    .optional(),
   mot_de_passe: z
     .string({
       required_error: "Le mot de passe est obligatoire",
@@ -34,16 +36,28 @@ const userSchema = z.object({
       message: "Exigence min: Azerty-02.",
     }),
   confirm: z.string(),
-  profile: z.string(),
+  profile: z
+    .string()
+    .nullish(),
 });
 
-export const registerSchema = userSchema.refine(
-  (data) => data.mot_de_passe === data.confirm,
-  {
-    message: "Les mots de passe ne correspondent pas",
-    path: ["confirm"],
-  },
-);
+export const registerSchema = userSchema.superRefine(({ mot_de_passe, confirm, profile, adresse }, ctx) => {
+  if(mot_de_passe !== confirm) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Les mots de passe ne correspondent pas",
+      path: ["confirm"],  
+    })
+  }
+
+  if(profile === "coiffeur" && adresse.length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Merci de saisir une adresse mail",
+      path: ["adresse"]
+    })
+  }
+});
 
 export type RegisterType = z.infer<typeof registerSchema>;
 
