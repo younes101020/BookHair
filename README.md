@@ -18,6 +18,28 @@ you can now explore the application from this url [bookhair](http://localhost:30
 
 your database data will be persisted inside postgres-data folder in the root of the project
 
+## Common issue on windows
+
+the git repository have an entry point script (bookhair/start.sh) with Unix line endings (\n). But when the repository was checked out on a windows machine, git decided to try and be clever and replace the line endings in the files with windows line endings (\r\n).
+
+This meant that the shebang don't because instead of looking for /bin/bash, it was looking for /bin/bash\r.
+
+The solution is to disable git's automatic conversion:
+
+```bash
+git config --global core.autocrlf input
+```
+
+Reset the repo using this (don't forget to save your changes):
+
+```bash
+git rm --cached -r .
+git reset --hard
+And then rebuild.
+```
+
+source: [here](https://stackoverflow.com/questions/38905135/why-wont-my-docker-entrypoint-sh-execute)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
