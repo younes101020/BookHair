@@ -35,7 +35,7 @@
     --radius: 0.5rem;
   }
 
-  .dark {
+  .dark, [data-theme='dark'] {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
@@ -111,4 +111,18 @@ input[type="email"] {
   content: ">";
   padding-right: 0.5rem;
   font-weight: 100;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+-webkit-text-fill-color: #fff;
+background-color: #636c1b;
+transition: background-color 5000s ease-in-out 0s;
 }
