@@ -12,17 +12,8 @@ import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import AutoComplete from "@/components/client/AutoComplete";
 
-async function getAutoCompletePosition(address: string) {
-  const res = await fetch(
-    `https://cors-anywhere.herokuapp.com/https://api-adresse.data.gouv.fr/search/?q=${address}&limit=15`,
-  );
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 
 export default function RegisterPage() {
   const { data: session } = useSession();
@@ -52,13 +43,6 @@ export default function RegisterPage() {
     //   toast.success("Inscription réussis");
     //   redirect("/login");
     // }
-  };
-
-  const handleChange = async ({ target: { value } }: any) => {
-    if (value.length > 3) {
-      const suggestion = await getAutoCompletePosition(encodeURIComponent(value));
-      console.log(suggestion);
-    }
   };
 
   return (
@@ -215,15 +199,9 @@ export default function RegisterPage() {
         {profil === "coiffeur" && (
           <div className="relative col-span-2 mb-3 flex flex-col gap-2 lg:col-span-2">
             <Label htmlFor="adresse">Adresse:</Label>
-            <Input
-              type="text"
-              placeholder="15 rue General Leclerc"
-              id="adresse"
-              data-test="adresse"
-              className="position-icon required:border-red-500"
-              {...register("adresse")}
-              disabled={isSubmitting}
-              onChange={handleChange}
+            <AutoComplete
+              register={register}
+              isSubmitting={isSubmitting}
             />
             {errors.adresse?.message && (
               <p className="absolute bottom-[-1.8rem] whitespace-nowrap text-sm text-red-600">
