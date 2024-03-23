@@ -5,11 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
 import { useState } from "react";
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { addUser } from "@/app/actions";
+import { addUser } from "./_actions/adduser";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from "react";
 import { RegisterType, registerSchema } from "@/shared/lib/zod/user.schema";
-import { AiOutlineCheck, AiOutlineEnvironment } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
