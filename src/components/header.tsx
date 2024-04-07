@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { Roboto as SecondFont } from "@/app/fonts";
-import { authOptions } from "@/app/api/lib/auth/[...nextauth]/route";
 import Signout from "@/components/client/Signout";
 import { buttonVariants } from "@/components/ui/button";
+import { auth } from "@/lib/auth";
 
 export const Header = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   return (
     <header className="absolute top-0 z-10 flex w-full justify-between border-b-2 border-b-white bg-black bg-opacity-75 px-3 py-5 text-white">

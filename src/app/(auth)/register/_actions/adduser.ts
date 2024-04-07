@@ -2,6 +2,7 @@
 
 import { prisma } from "@/db";
 import hashPass from "@/shared/lib/bcrypt/hash";
+import { redirect } from "next/navigation";
 // import { withValidate } from "@/lib/form-validation";
 
 export async function addUser(user: any) {
@@ -21,4 +22,5 @@ export async function addUser(user: any) {
       phone: user.telephone,
     },
   });
+  redirect('/login?success=true');
 }
